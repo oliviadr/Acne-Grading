@@ -5,17 +5,118 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Acne Level Prediction</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <meta content="text/html; charset=iso-8859-2" http-equiv="Content-Type">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+        body {
+            background-color: #faeee9;
+            color: #735366;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            background-color: #faeee9;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .description {
+            margin-top: 20px;
+            font-size: 1.1em;
+        }
+        .examples {
+            margin-top: 20px;
+        }
+        .card {
+            background-color: #faeee9;
+            border: 2px solid #735366;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .card-body {
+            padding: 20px;
+        }
+        .btn-primary {
+            background-color: #735366;
+            border: none;
+            color: #faeee9;
+        }
+        .btn-secondary {
+            background-color: #a77a95;
+            border: none;
+            color: #faeee9;
+        }
+        .btn-primary:hover, .btn-secondary:hover {
+            background-color: #735366;
+            color: #faeee9;
+        }
+        .gallery-container {
+            overflow: hidden;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        .gallery {
+            display: flex;
+            transition: transform 0.5s ease;
+            will-change: transform;
+        }
+        .gallery img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-right: 20px;
+        }
+        .text-center p {
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-    <h1 class="text-center">Acne Level Prediction</h1>
-    <p class="text-center description">
-        Welcome to our Acne Level Prediction service. Upload an image of your face, or use your camera to take a photo, 
-        and our advanced AI models will analyze and predict the level of acne. 
-        This service is designed to help you understand your skin condition better and take appropriate actions.
-    </p>
+<div class="container my-5">
+    <div class="text-center mb-5">
+        <h1>Acne Level Prediction</h1>
+        <p class="description">
+            Welcome to our Acne Level Prediction service. Upload an image of your face, or use your camera to take a photo,
+            and our advanced AI models will analyze and predict the level of acne.
+            This service is designed to help you understand your skin condition better and take appropriate actions.
+        </p>
+    </div>
+    <div class="card mb-5">
+        <div class="card-body">
+            <h5 class="card-title text-center examples">Examples of images:</h5>
+            <div class="gallery-container">
+                <div class="gallery" id="gallery">
+                    <img src="{{ url_for('static', filename='img/1.jpg') }}">
+                    <img src="{{ url_for('static', filename='img/2.jpg') }}">
+                    <img src="{{ url_for('static', filename='img/3.jpg') }}">
+                    <img src="{{ url_for('static', filename='img/4.jpg') }}">
+                    <img src="{{ url_for('static', filename='img/5.jpg') }}">
+                    <img src="{{ url_for('static', filename='img/6.jpg') }}">
+                    <img src="{{ url_for('static', filename='img/7.jpeg') }}">
+                </div>
+            </div>
+            <div class="text-center">
+                <p>
+                    Please note our models aren't trained on dark skin.<br>
+                    We don't guarantee results on faces with beards, glasses, and other objects.<br>
+                    Try to take a close-up picture of your face and the condition.
+                </p>
+            </div>
+        </div>
+    </div>
     <video id="camera-stream" class="d-none"></video>
     <form method="post" enctype="multipart/form-data" class="text-center" action="/">
         <div class="form-group">
@@ -27,6 +128,7 @@
         </div>
         <button type="submit" class="btn btn-primary">Upload</button>
     </form>
+    </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -68,5 +170,25 @@
         });
     }
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const gallery = document.getElementById('gallery');
+        const slides = Array.from(gallery.children);
+        const slideWidth = slides[0].offsetWidth + parseInt(window.getComputedStyle(slides[0]).marginRight);
+        let slideIndex = 0;
+
+        function showSlides() {
+            slideIndex++;
+            if (slideIndex >= slides.length - 5) {
+                slideIndex = 0;
+            }
+            gallery.style.transition = 'transform 0.5s ease';
+            gallery.style.transform = `translateX(-${slideIndex * slideWidth}px)`;
+        }
+
+        setInterval(showSlides, 2000);
+    });
+</script>
+
 </body>
 </html>
