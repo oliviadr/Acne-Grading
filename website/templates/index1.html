@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Acne Grading</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="HTML5 website template">
+  <meta name="keywords" content="global, template, html, sass, jquery">
+  <meta name="author" content="Drobot Olivia">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+
+<!-- notification for small viewports and landscape oriented smartphones -->
+<div class="device-notification">
+  <a class="device-notification--logo" href="#0">
+    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Acne Grading">
+    <p>Acne Grading</p>
+  </a>
+  <p class="device-notification--message">The website has so much to offer that we must request you orient your device to portrait or find a larger screen. You won't be disappointed.</p>
+</div>
+
+<div class="perspective effect-rotate-left">
+  <div class="container"><div class="outer-nav--return"></div>
+    <div id="viewport" class="l-viewport">
+      <div class="l-wrapper">
+        <header class="header">
+          <a class="header--logo" href="#0">
+            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Acne Grading">
+            <p>Acne Grading</p>
+          </a>
+          
+          <div class="header--nav-toggle">
+            <span></span>
+          </div>
+        </header>
+        <nav class="l-side-nav">
+          <ul class="side-nav">
+            <li class="is-active"><span>Home</span></li>
+            <li><span>Test your skin</span></li>
+            <li><span>About</span></li>
+            
+           
+          </ul>
+        </nav>
+        <ul class="l-main-content main-content">
+          <li class="l-section section section--is-active">
+            <div class="intro">
+              <div class="intro--banner">
+                <h1>Test your<br>acne<br>severity</h1>
+                <button class="cta" >About
+                  <svg version="1.1" id="#0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 150 118" style="enable-background:new 0 0 150 118;" xml:space="preserve">
+                  <g transform="translate(0.000000,118.000000) scale(0.100000,-0.100000)">
+                    <path d="M870,1167c-34-17-55-57-46-90c3-15,81-100,194-211l187-185l-565-1c-431,0-571-3-590-13c-55-28-64-94-18-137c21-20,33-20,597-20h575l-192-193C800,103,794,94,849,39c20-20,39-29,61-29c28,0,63,30,298,262c147,144,272,271,279,282c30,51,23,60-219,304C947,1180,926,1196,870,1167z"/>
+                  </g>
+                  </svg>
+                  <span class="btn-background"></span>
+                </button>
+                <img src="{{ url_for('static', filename='img/acne.png') }}" alt="Welcome">
+              </div>
+              <div class="intro--options">
+                <a href="#0">
+                  <h3>1000+ Tested Images </h3>
+                  <p>Our models were rigorously trained and validated on a diverse set of over 1000 images to ensure accuracy and reliability</p>
+                </a>
+                <a href="#0">
+                  <h3>Outstanding Accuracy</h3>
+                  <p>Achieving over 75% accuracy, our models provide dependable acne assessment. (Not for medical use)
+                  </p>
+                </a>
+                <a href="#0">
+                  <h3>Cutting-Edge Models</h3>
+                  <p>Leveraging the power of ResNet-50 and DenseNet-169, our pre-trained models deliver top-tier performance in acne detection and grading.</p>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="l-section section" id="#1">
+            <div class="work">
+              <h2>Selected model</h2>
+              <div class="work--lockup">
+                <ul class="slider">
+                  <li class="slider--item slider--item-left">
+                    <a href="{{ url_for('indexdensenet') }}">
+                      <div class="slider--item-image">
+                        <img src="{{ url_for('static', filename='img/densenet.png') }}" alt="DenseNet">
+                      </div>
+                      <p class="slider--item-title">DenseNet-169</p>
+                      <p class="slider--item-description">Our acne detection and grading model leverages the powerful DenseNet-169 architecture, achieving an impressive 85.5% training accuracy and 77% validation accuracy.</p>
+                    </a>
+                  </li>
+                  <li class="slider--item slider--item-center">
+                    <a href="{{ url_for('index') }}">
+                      <div class="slider--item-image">
+                        <img src="{{ url_for('static', filename='img/rd.png') }}" alt="Models">
+                      </div>
+                      <p class="slider--item-title">ResNet-50 & DenseNet-169</p>
+                      <p class="slider--item-description">Our acne detection and grading solution offers two advanced models: ResNet-50 and DenseNet-169. ResNet-50 achieves 83% training accuracy and 80% validation accuracy, while DenseNet-169 reaches 85.5% training accuracy and 77% validation accuracy. </p>
+                    </a>
+                  </li>
+                  <li class="slider--item slider--item-right">
+                    <a href="{{ url_for('indexresnet') }}">
+                      <div class="slider--item-image">
+                        <img src="{{ url_for('static', filename='img/resnet.png') }}" alt="Resnet50">
+                      </div>
+                      <p class="slider--item-title">ResNet-50</p>
+                      <p class="slider--item-description">Our acne detection and grading model leverages the powerful ResNet-50 architecture, achieving an impressive 83% training accuracy and 80% validation accuracy. </p>
+                    </a>
+                  </li>
+                </ul>
+                <div class="slider--prev">
+                  <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                  viewBox="0 0 150 118" style="enable-background:new 0 0 150 118;" xml:space="preserve">
+                  <g transform="translate(0.000000,118.000000) scale(0.100000,-0.100000)">
+                    <path d="M561,1169C525,1155,10,640,3,612c-3-13,1-36,8-52c8-15,134-145,281-289C527,41,562,10,590,10c22,0,41,9,61,29
+                    c55,55,49,64-163,278L296,510h575c564,0,576,0,597,20c46,43,37,109-18,137c-19,10-159,13-590,13l-565,1l182,180
+                    c101,99,187,188,193,199c16,30,12,57-12,84C631,1174,595,1183,561,1169z"/>
+                  </g>
+                  </svg>
+                </div>
+                <div class="slider--next">
+                  <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 150 118" style="enable-background:new 0 0 150 118;" xml:space="preserve">
+                  <g transform="translate(0.000000,118.000000) scale(0.100000,-0.100000)">
+                    <path d="M870,1167c-34-17-55-57-46-90c3-15,81-100,194-211l187-185l-565-1c-431,0-571-3-590-13c-55-28-64-94-18-137c21-20,33-20,597-20h575l-192-193C800,103,794,94,849,39c20-20,39-29,61-29c28,0,63,30,298,262c147,144,272,271,279,282c30,51,23,60-219,304C947,1180,926,1196,870,1167z"/>
+                  </g>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="l-section section">
+            <div class="about">
+              <h2>About Models</h2>
+              <br>Our acne detection and grading solution utilizes two advanced deep learning models: ResNet-50 and DenseNet-169. Both models are renowned for their robust performance and have been pre-trained on extensive datasets to leverage their powerful feature extraction capabilities.
+
+<br>To ensure our models are highly accurate and reliable, we trained them on a diverse dataset of over 1000 images. These images included both original and augmented versions to enhance the models' ability to generalize across various acne presentations. Augmentation techniques such as random cropping, horizontal flipping, color jittering, and histogram equalization were applied to simulate a wide range of real-world conditions and improve the models' robustness.
+
+<br><h2>Model Performance</h2>
+
+<br>ResNet-50: Achieved an impressive 83% training accuracy and 80% validation accuracy.
+<br>DenseNet-169: Reached an outstanding 85.5% training accuracy and 77% validation accuracy.
+<br><br>These accuracies reflect our commitment to providing reliable and consistent acne severity assessments. The use of both original and augmented images has played a crucial role in enhancing the models' performance, allowing them to effectively analyze and classify acne severity from diverse and complex image inputs.
+
+<br>Our models are designed for research and informational purposes, providing a solid foundation for further advancements in automated acne assessment.
+
+            </div>
+          </li>
+         
+          
+        </ul>
+      </div>
+    </div>
+  </div>
+  <ul class="outer-nav">
+    <li class="is-active">Home</li>
+    <li>Test your skin</li>
+    <li>About</li>
+   
+  </ul>
+</div>
+
+
+   
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="C:/Users/olivia/OneDrive/Desktop/a/website/static/js/vendor/jquery-2.2.4.min.js"><\/script>')</script>
+
+<script src="{{ url_for('static', filename='js/functions-min.js') }}"></script>
+</body>
+</html>
