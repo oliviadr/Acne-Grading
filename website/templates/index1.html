@@ -78,7 +78,7 @@
           </li>
           <li class="l-section section" id="#1">
             <div class="work">
-              <h2>Selected model</h2>
+              <h2>Select the model</h2>
               <div class="work--lockup">
                 <ul class="slider">
                   <li class="slider--item slider--item-left">
@@ -91,7 +91,7 @@
                       <p class="slider--item-title">DenseNet-169</p>
                       <p class="slider--item-description">Our acne detection and grading model leverages the powerful DenseNet-169 architecture, achieving an impressive 85.5% training accuracy and 77% validation accuracy.</p>
                       <a href="{{ url_for('indexdensenet') }}">
-                      <button class="slider--item-description" style="margin-top:5px;border:none; background-color:#c3c3d5 ;color: #735366;padding: 10px 20px;">Select
+                      <button class="slider--item-description" style="margin-top:5px;border:none; background-color:#c3c3d5 ;color: #735366;padding: 10px 20px;border-radius:10px;">Select
                         
                       </button>
                     </a>
@@ -106,7 +106,7 @@
                       <p class="slider--item-description"> ResNet-50 achieves 83% training accuracy and 80% validation accuracy, while DenseNet-169 reaches 85.5% training accuracy and 77% validation accuracy. </p>
                       <a href="{{ url_for('index') }}">
                      
-                      <button class="slider--item-description" style="margin-top:5px;border:none; background-color:#c3c3d5 ;color: #735366;padding: 10px 20px;">Select
+                      <button class="slider--item-description" style="margin-top:5px;border:none; background-color:#c3c3d5 ;color: #735366;padding: 10px 20px;border-radius:10px;">Select
                         
                       </button>
                       </a>
@@ -121,7 +121,7 @@
                       <p class="slider--item-description">Our acne detection and grading model leverages the powerful ResNet-50 architecture, achieving an impressive 83% training accuracy and 80% validation accuracy. </p>
                       <a href="{{ url_for('indexresnet') }}">
                      
-                      <button class="slider--item-description" style="margin-top:5px;border:none; background-color:#c3c3d5 ;color: #735366;padding: 10px 20px;">Select
+                      <button class="slider--item-description" style="margin-top:5px;border:none; background-color:#c3c3d5 ;color: #735366;padding: 10px 20px;border-radius:10px;">Select
                         
                       </button>
                       </a>
@@ -149,8 +149,9 @@
           </li>
           <li class="l-section section">
             <div class="about">
+              
               <h2>About Models</h2>
-              <br>Our acne grading website utilizes two advanced deep learning models: ResNet-50 and DenseNet-169. Both models are renowned for their robust performance and have been pre-trained on extensive datasets to leverage their powerful feature extraction capabilities.
+              <p>   <br>Our acne grading website utilizes two advanced deep learning models: ResNet-50 and DenseNet-169. Both models are renowned for their robust performance and have been pre-trained on extensive datasets to leverage their powerful feature extraction capabilities.
 
 <br>To ensure our models are highly accurate and reliable, we trained them on a diverse dataset of over 1000 images. These images included both original and augmented versions to enhance the models' ability to generalize across various acne presentations. 
 <br>Augmentation techniques such as random cropping, horizontal flipping, color jittering, and histogram equalization were applied to simulate a wide range of real-world conditions and improve the models' robustness.
@@ -159,11 +160,10 @@
 
 <br>ResNet-50: Achieved an impressive 83% training accuracy and 80% validation accuracy.
 <br>DenseNet-169: Reached an outstanding 85.5% training accuracy and 77% validation accuracy.
-<br><br>These accuracies reflect our commitment to providing reliable and consistent acne severity assessments. 
-<br>The use of both original and augmented images has played a crucial role in enhancing the models' performance, allowing them to effectively analyze and classify acne severity from diverse and complex image inputs.
+
 
 <br>Our models are designed for research and informational purposes, providing a solid foundation for further advancements in automated acne assessment.
-
+</p>
             </div>
           </li>
          

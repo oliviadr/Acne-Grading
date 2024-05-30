@@ -140,6 +140,24 @@ def predictdensenet():
     
     return jsonify(densenet_class=densenet_prediction)
 
+@app.route('/predict_camera', methods=['POST'])
+def predict_camera():
+    data = json.loads(request.data)
+    image_data = data['image_data']
+    _, encoded = image_data.split(",", 1)
+    image_bytes = base64.b64decode(encoded)
+    resnet_prediction = predict_image(image_bytes, 'resnet')
+    densenet_prediction = predict_image(image_bytes, 'densenet')
+    
+    return jsonify(resnet_class=resnet_prediction, densenet_class=densenet_prediction)
+
+@app.route('/result', methods=['GET'])
+def result():
+    resnet_class = request.args.get('resnet_class')
+    densenet_class = request.args.get('densenet_class')
+    return render_template('result.html', resnet_class=resnet_class, densenet_class=densenet_class)
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

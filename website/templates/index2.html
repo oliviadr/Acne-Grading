@@ -9,8 +9,6 @@
     <link href="{{ url_for('static', filename='css/normalize.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ url_for('static', filename='css/webflow.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ url_for('static', filename='css/acne-level-prediction.webflow.css') }}" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-
     <script type="text/javascript">
         !function (o, c) { var n = c.documentElement, t = " w-mod-"; n.className += t + "js", ("ontouchstart" in o || o.DocumentTouch && c instanceof DocumentTouch) && (n.className += t + "touch") }(window, document);
     </script>
@@ -34,7 +32,7 @@
 
         .card {
             background-color: #faeee9;
-            border: 2px solid #c3c3d5;
+            border: 2px solid #735366;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s;
@@ -49,25 +47,21 @@
         }
 
         .btn-primary {
-            background-color: #c3c3d5;
+            background-color: #735366;
             border: none;
-            color: #000;
-            font-weight: bold;
+            color: #faeee9;
         }
 
         .btn-secondary {
-            background-color: #c3c3d5;
+            background-color: #a77a95;
             border: none;
-            color: #000;
-            font-weight: bold;
-            
+            color: #faeee9;
         }
 
         .btn-primary:hover,
         .btn-secondary:hover {
             background-color: #735366;
             color: #faeee9;
-            font-weight: bold;
         }
 
         .gallery-container {
@@ -143,10 +137,6 @@
             display: none;
             margin-top: 10px;
         }
-
-        .textt{
-            align-items: center;
-        }
     </style>
 </head>
 
@@ -154,10 +144,10 @@
     <div class="wrapper">
         <div class="_600-wp">
             <div class="h2-wp mid">
-                <h2 class="heading-2">ResNet-50 and DenseNet-169 Models</h2>
+                <h2 class="heading-2">Acne Level Prediction</h2>
             </div>
             <div class="bodytext-wp mid">
-                <div class="body-text light-blue" style="color: #000;">Upload an image of your face or use your camera to take a photo and our advanced AI models will analyze and predict the level of acne.<br> This service is designed to help you understand your skin condition better and take appropriate actions. </div>
+                <div class="body-text light-blue">Welcome to our Acne Level Prediction service. Upload an image of your face, or use your camera to take a photo, and our advanced AI models will analyze and predict the level of acne. This service is designed to help you understand your skin condition better and take appropriate actions. </div>
                 <div class="body-text light-blue" style="font-weight: bold;">Example Images</div>
             </div>
         </div>
@@ -182,7 +172,7 @@
                 <div class="horiz-div"></div>
             </div>
             <div class="bodytext-wp gery">
-                <div class="bodytext-grey">Please note our models aren't trained on dark skin. We don't guarantee results on faces with beards, glasses or tattoos.Try to take a close-up picture of your face and the condition.</div>
+                <div class="bodytext-grey">Please note our models aren't trained on dark skin. We don't guarantee results on faces with beards, glasses and other objects. Try to take a close-up picture of your face and the condition.</div>
             </div>
         </div>
         <div class="button-container">
@@ -247,45 +237,40 @@
             }
         }
 
-        
-    function startCamera() {
-        const video = document.getElementById('camera-stream');
-        video.classList.remove('d-none');
-        navigator.mediaDevices.getUserMedia({ video: true })
-            .then(function (stream) {
-                video.srcObject = stream;
-                video.play();
-                document.getElementById('click-photo').classList.remove('d-none');
-            })
-            .catch(function (error) {
-                console.error("Cannot access camera: ", error);
+        function startCamera() {
+            const video = document.getElementById('camera-stream');
+            video.classList.remove('d-none');
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function (stream) {
+                    video.srcObject = stream;
+                    video.play();
+                    document.getElementById('click-photo').classList.remove('d-none');
+                })
+                .catch(function (error) {
+                    console.error("Cannot access camera: ", error);
+                });
+
+            document.getElementById('click-photo').addEventListener('click', function () {
+                const canvas = document.createElement('canvas');
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                canvas.getContext('2d').drawImage(video, 0, 0);
+                const imageDataURL = canvas.toDataURL('image/jpeg');
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/predict',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ image_data: imageDataURL }),
+                    success: function (response) {
+                        alert('ResNet Prediction: ' + response.resnet_class + '    DenseNet Prediction: ' + response.densenet_class);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error: ' + JSON.stringify(xhr));
+                    }
+                });
             });
-
-        document.getElementById('click-photo').addEventListener('click', function () {
-            const canvas = document.createElement('canvas');
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-            canvas.getContext('2d').drawImage(video, 0, 0);
-            const imageDataURL = canvas.toDataURL('image/jpeg');
-
-            fetch('/predict_camera', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ image_data: imageDataURL }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                window.location.href = `/result?resnet_class=${data.resnet_class}&densenet_class=${data.densenet_class}`;
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-        });
-    }
-
-
+        }
     </script>
 </body>
 
