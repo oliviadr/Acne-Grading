@@ -3,19 +3,22 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Acne level prediction</title>
+    <title>Acne Level Prediction</title>
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <meta content="Webflow" name="generator">
     <link href="{{ url_for('static', filename='css/normalize.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ url_for('static', filename='css/webflow.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ url_for('static', filename='css/acne-level-prediction.webflow.css') }}" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 
     <script type="text/javascript">
         !function (o, c) { var n = c.documentElement, t = " w-mod-"; n.className += t + "js", ("ontouchstart" in o || o.DocumentTouch && c instanceof DocumentTouch) && (n.className += t + "touch") }(window, document);
     </script>
 
     <style>
+        .body{ 
+            background-color: #735366;
+        }
         .container {
             background-color: #faeee9;
             border-radius: 10px;
@@ -34,10 +37,11 @@
 
         .card {
             background-color: #faeee9;
-            border: 2px solid #c3c3d5;
+            border: 2px solid #735366;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
             transition: transform 0.3s;
+            margin-bottom: 20px;
         }
 
         .card:hover {
@@ -46,28 +50,26 @@
 
         .card-body {
             padding: 20px;
+            background-color: #735366;
         }
 
-        .btn-primary {
-            background-color: #c3c3d5;
-            border: none;
-            color: #000;
-            font-weight: bold;
-        }
-
+        .btn-primary,
         .btn-secondary {
             background-color: #c3c3d5;
             border: none;
-            color: #000;
+            color: #735366;
             font-weight: bold;
-            
+            padding: 10px 20px;
+            cursor: pointer;
+            text-align: center;
+            display: inline-block;
+            margin: 10px 0;
         }
 
         .btn-primary:hover,
         .btn-secondary:hover {
             background-color: #735366;
             color: #faeee9;
-            font-weight: bold;
         }
 
         .gallery-container {
@@ -104,7 +106,7 @@
         }
 
         .examples {
-            color: #735366;
+            color: #faeee9;
             align-items: center;
             font-size: 1.5em;
         }
@@ -115,11 +117,19 @@
             padding: 20px;
             text-align: center;
             margin-top: 20px;
-            background-color: #fafafa;
+            background-color: #faeee9;
+        }
+        .upload-container1 {
+            border: 2px  #a77a95;
+            /* border-radius: 50px; */
+            padding: 20px;
+            text-align: center;
+            margin: 20px;
+            background-color: #faeee9;
         }
 
         .upload-container:hover {
-            background-color: #f0f0f0;
+            background-color: #faeee9;
         }
 
         .upload-container input[type="file"] {
@@ -138,14 +148,103 @@
         }
 
         .upload-container img {
-            max-width: 100%;
+            max-width: 500px;
+            max-height: 300px;
             height: auto;
             display: none;
             margin-top: 10px;
         }
-
-        .textt{
+        .form-group{
+            /* border: 2px dashed #faeee9; */
+            border-radius: 10px;
+            /* padding: 20px; */
+            text-align: center;
+            /* margin-top: 20px; */
+            /* background-color: #faeee9; */
+            color: #faeee9;
+            font-weight: bold;
+          
+            text-align: center;
+        
+        }
+        .form-group2{
+            /* border: 2px dashed #a77a95; */
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            margin-top: 20px;
+            /* background-color: #faeee9; */
+            color: #faeee9;
+            
+          
+            text-align: center;
+        
+        }
+        .textt {
             align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .card-body {
+                padding: 15px;
+            }
+
+            .gallery img {
+                width: 150px;
+                height: 150px;
+                margin-right: 10px;
+            }
+
+            .examples {
+                font-size: 1.2em;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                padding: 8px 16px;
+                margin: 5px 0;
+            }
+
+            .upload-container {
+                padding: 15px;
+            }
+
+            .upload-container label {
+                font-size: 1em;
+            }
+
+            .description {
+                font-size: 1em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery img {
+                width: 100px;
+                height: 100px;
+                margin-right: 5px;
+            }
+
+            .examples {
+                font-size: 1em;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                padding: 6px 12px;
+            }
+
+            .upload-container {
+                padding: 10px;
+            }
+
+            .upload-container label {
+                font-size: 0.9em;
+            }
+
+            .description {
+                font-size: 0.9em;
+            }
         }
     </style>
 </head>
@@ -154,15 +253,15 @@
     <div class="wrapper">
         <div class="_600-wp">
             <div class="h2-wp mid">
-                <h2 class="heading-2">ResNet-50 and DenseNet-169 Models</h2>
+                <h2 class="heading-2" style="color: #faeee9;">ResNet-50 and DenseNet-169 Models</h2>
             </div>
             <div class="bodytext-wp mid">
-                <div class="body-text light-blue" style="color: #000;">Upload an image of your face or use your camera to take a photo and our advanced AI models will analyze and predict the level of acne.<br> This service is designed to help you understand your skin condition better and take appropriate actions. </div>
+                <div class="body-text light-blue" style="color: #faeee9;">Upload an image of your face or use your camera to take a photo and our advanced AI models will analyze and predict the level of acne.<br> This service is designed to help you understand your skin condition better and take appropriate actions. </div>
                 <div class="body-text light-blue" style="font-weight: bold;">Example Images</div>
             </div>
         </div>
-        
-        <div class="card mb-5">
+
+        <div class="card">
             <div class="card-body">
                 <div class="gallery-container">
                     <div class="gallery" id="gallery">
@@ -178,34 +277,38 @@
             </div>
         </div>
         <div class="box-contents">
-            <div class="div-header">
+            <div class="div-header" style="color:#000 ;">
                 <div class="horiz-div"></div>
             </div>
             <div class="bodytext-wp gery">
-                <div class="bodytext-grey">Please note our models aren't trained on dark skin. We don't guarantee results on faces with beards, glasses or tattoos.Try to take a close-up picture of your face and the condition.</div>
+                <div class="form-group2">Please note our models aren't trained on dark skin. We don't guarantee results on faces with beards, glasses or tattoos. Try to take a close-up picture of your face and the condition.</div>
             </div>
         </div>
+        <!-- <div class="upload-container1"> -->
         <div class="button-container">
-            <video id="camera-stream" class="d-none"></video>
             <form method="post" enctype="multipart/form-data" class="text-center" action="/">
-                <div class="form-group">
-                    <button type="button" class="btn btn-secondary" onclick="startCamera()">Use Camera</button>
-                    <button type="button" class="btn btn-secondary d-none" id="click-photo">Capture</button>
-                </div>
-                <br><br>
+           
+            
                 <div class="upload-container">
-                    <input type="file" name="file" id="file" class="form-control-file" onchange="previewFile()">
-                    <label for="file" id="upload-label">Drag & Drop to Upload File</label>
-                    <p id="upload-text">OR</p>
+                    <input type="file" name="file" id="file" class="form-control-file" style="justify-content: center; scale: 50%;" onchange="previewFile()">
+                    <label for="file" id="upload-label">Upload Your File</label>
+                    <!-- <p id="upload-text">OR</p> -->
                     <label for="file" class="btn btn-secondary">Browse File</label>
                     <button type="submit" class="btn btn-primary">Upload</button>
                     <img id="preview-img" src="#">
                 </div>
-               
+                <br><div class="form-group">OR</div><br>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-secondary" onclick="startCamera()">Use Camera</button>
+                        <button type="button" class="btn btn-primary" id="click-photo">Capture</button>
+
+                    </div>
+                <video id="camera-stream" class="d-none"></video>
+
             </form>
         </div>
     </div>
-
+</div>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.9.5/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -220,7 +323,7 @@
 
             function showSlides() {
                 slideIndex++;
-                if (slideIndex >= slides.length - 5) {
+                if (slideIndex >= slides.length - 4) {
                     slideIndex = 0;
                 }
                 gallery.style.transition = 'transform 0.5s ease';
@@ -239,7 +342,7 @@
                 preview.src = reader.result;
                 preview.style.display = 'block';
                 document.getElementById('upload-label').style.display = 'none';
-                document.getElementById('upload-text').style.display = 'none';
+                // document.getElementById('upload-text').style.display = 'none';
             }, false);
 
             if (file) {
@@ -247,46 +350,44 @@
             }
         }
 
-        
-    function startCamera() {
-        const video = document.getElementById('camera-stream');
-        video.classList.remove('d-none');
-        navigator.mediaDevices.getUserMedia({ video: true })
-            .then(function (stream) {
-                video.srcObject = stream;
-                video.play();
-                document.getElementById('click-photo').classList.remove('d-none');
-            })
-            .catch(function (error) {
-                console.error("Cannot access camera: ", error);
+        function startCamera() {
+            const video = document.getElementById('camera-stream');
+            video.classList.remove('d-none');
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function (stream) {
+                    video.srcObject = stream;
+                    video.play();
+                    document.getElementById('click-photo').classList.remove('d-none');
+                })
+                .catch(function (error) {
+                    console.error("Cannot access camera: ", error);
+                });
+
+            document.getElementById('click-photo').addEventListener('click', function () {
+                const canvas = document.createElement('canvas');
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                canvas.getContext('2d').drawImage(video, 0, 0);
+                const imageDataURL = canvas.toDataURL('image/jpeg');
+
+                fetch('/predict_camera', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ image_data: imageDataURL }),
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        window.location.href = `/result?resnet_class=${data.resnet_class}&densenet_class=${data.densenet_class}`;
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                    });
             });
-
-        document.getElementById('click-photo').addEventListener('click', function () {
-            const canvas = document.createElement('canvas');
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-            canvas.getContext('2d').drawImage(video, 0, 0);
-            const imageDataURL = canvas.toDataURL('image/jpeg');
-
-            fetch('/predict_camera', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ image_data: imageDataURL }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                window.location.href = `/result?resnet_class=${data.resnet_class}&densenet_class=${data.densenet_class}`;
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-        });
-    }
-
-
+        }
     </script>
 </body>
 
 </html>
+

@@ -157,6 +157,17 @@ def result():
     densenet_class = request.args.get('densenet_class')
     return render_template('result.html', resnet_class=resnet_class, densenet_class=densenet_class)
 
+@app.route('/resultresnet', methods=['GET'])
+def resultresnet():
+    resnet_class = request.args.get('resnet_class')
+    densenet_class = request.args.get('densenet_class')
+    return render_template('resultresnet.html', resnet_class=resnet_class, densenet_class=densenet_class)
+
+@app.route('/resultdensenet', methods=['GET'])
+def resultdensenet():
+    # resnet_class = request.args.get('resnet_class')
+    densenet_class = request.args.get('densenet_class')
+    return render_template('resultdensenet.html',  densenet_class=densenet_class)
 
 
 if __name__ == '__main__':
