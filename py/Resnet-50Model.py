@@ -2,18 +2,24 @@ import torch
 import torchvision
 import torchvision.transforms as transforms
 from torchvision.datasets import ImageFolder
-from torch.utils.data import DataLoader, random_split, Dataset, Subset
+from torch.utils.data import DataLoader, random_split, Dataset, Subset  
 from torchvision import models
 import torch.nn as nn
-import torch.optim as optim
 import numpy as np
+import torch.optim as optim
 import matplotlib.pyplot as plt
+import random
+from PIL import Image, ImageFilter
+from sklearn.metrics import confusion_matrix
+import seaborn as sns
 from PIL import Image
+from sklearn.utils.class_weight import compute_class_weight
 import cv2
+import numpy as np
 
 # Custom transformation for histogram equalization
 class HistogramEqualization:
-    def __call__(self, img):
+    def _call_(self, img):
         img = np.array(img)
         if len(img.shape) == 3 and img.shape[2] == 3:  # Color image
             img_yuv = cv2.cvtColor(img, cv2.COLOR_RGB2YUV)
@@ -31,14 +37,14 @@ train_indices, val_indices = random_split(range(len(full_dataset)), [train_size,
 
 # Custom dataset to apply transformations
 class CustomDataset(Dataset):
-    def __init__(self, dataset, indices, transform=None):
+    def _init_(self, dataset, indices, transform=None):
         self.dataset = Subset(dataset, indices)
         self.transform = transform
 
-    def __len__(self):
+    def _len_(self):
         return len(self.dataset)
 
-    def __getitem__(self, idx):
+    def _getitem_(self, idx):
         original_img, label = self.dataset[idx]
         transformed_img = self.transform(original_img) if self.transform else original_img
         return (original_img, transformed_img), (label, label)
@@ -144,6 +150,15 @@ def train_model(model, criterion, optimizer, train_loader, val_loader, num_epoch
 
         val_losses.append(val_loss)
         val_accuracies.append(val_acc.item())
+
+         # Confusion matrix
+        cm = confusion_matrix(all_labels, all_preds)
+        plt.figure(figsize=(10, 7))
+        sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
+        plt.xlabel('Predicted Labels')
+        plt.ylabel('True Labels')
+        plt.title('Confusion Matrix')
+        plt.show()
 
         # Save the model if validation accuracy has improved
         if val_acc > best_acc:

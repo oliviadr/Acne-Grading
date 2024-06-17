@@ -93,7 +93,7 @@ def upload_file():
         densenet_prediction = predict_image(img_bytes, 'densenet')
         return render_template('result.html', resnet_class=resnet_prediction, densenet_class=densenet_prediction)
 
-    return render_template('index1.html')
+    return render_template('home.html')
 
 
 @app.route('/index', methods=['GET'])

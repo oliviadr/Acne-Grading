@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>DenseNet Prediction Results</title>
+    <title>Prediction Results</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -20,11 +20,19 @@
 </head>
 <body>
 <div class="container">
-    <h1 class="text-center">ResNet Prediction Results</h1>
-    <p class="text-center">ResNet Prediction: {{ resnet_class }}</p>
-    <h1 class="text-center">DenseNet Prediction Results</h1>
-    <p class="text-center">DenseNet Prediction: {{ densenet_class }}</p>
-    <a href="/" class="btn btn-primary d-block mx-auto" style="width: 200px;">Back to Home</a>
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-center">ResNet Prediction Results</h1>
+            <p class="text-center">ResNet Prediction: {{ resnet_class }}</p>
+        </div>
+        <div class="col-12">
+            <h1 class="text-center">DenseNet Prediction Results</h1>
+            <p class="text-center">DenseNet Prediction: {{ densenet_class }}</p>
+        </div>
+        <div class="col-12 text-center">
+            <a href="/" class="btn btn-primary mx-auto" style="width: 200px; background-color:#c3c3d5; color:black;border-color:#735366;">Back to Home</a>
+        </div>
+    </div>
 </div>
 </body>
 </html>
