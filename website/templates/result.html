@@ -8,13 +8,54 @@
     <style>
         body {
             padding-top: 40px;
-            background: #f8f9fa;
+            background: #a77a95;
+        }
+        .btn-primary,
+        .btn-secondary {
+            background-color: #c3c3d5;
+            border: none;
+            color: #735366;
+            font-weight: bold;
+            padding: 10px 20px;
+            cursor: pointer;
+            text-align: center;
+            display: inline-block;
+            margin: 10px 0;
+        }
+
+        .btn-primary:hover,
+        .btn-secondary:hover {
+            background-color: #735366;
+            color: #faeee9;
         }
         .container {
             background: white;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+        }
+        .recommendation-block {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .recommendation-block h3 {
+            margin-bottom: 15px;
+        }
+        .recommendation-block ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .recommendation-block ul li {
+            background: #e9ecef;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+        .recommendation-block img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 15px;
+            border-radius: 10px;
         }
     </style>
 </head>
@@ -24,13 +65,77 @@
         <div class="col-12">
             <h1 class="text-center">ResNet Prediction Results</h1>
             <p class="text-center">ResNet Prediction: {{ resnet_class }}</p>
+            <div class="row">
+                <div class="col-md-4 recommendation-block">
+                    <h3>General Recommendations</h3>
+                    <ul>
+                        {% for recommendation in resnet_recommendations %}
+                            {% if loop.index <= 2 %}
+                                <li>{{ recommendation }}</li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col-md-4 recommendation-block">
+                    <h3>Additional Advice</h3>
+                    <ul>
+                        {% for recommendation in resnet_recommendations %}
+                            {% if loop.index > 2 and loop.index <= 4 %}
+                                <li>{{ recommendation }}</li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col-md-4 recommendation-block">
+                    <h3>Products to Consider</h3>
+                    <ul>
+                        {% for recommendation in resnet_recommendations %}
+                            {% if loop.index > 4 %}
+                                <li>{{ recommendation }}</li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
         </div>
         <div class="col-12">
             <h1 class="text-center">DenseNet Prediction Results</h1>
             <p class="text-center">DenseNet Prediction: {{ densenet_class }}</p>
+            <div class="row">
+                <div class="col-md-4 recommendation-block">
+                    <h3>General Recommendations</h3>
+                    <ul>
+                        {% for recommendation in densenet_recommendations %}
+                            {% if loop.index <= 2 %}
+                                <li>{{ recommendation }}</li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col-md-4 recommendation-block">
+                    <h3>Additional Advice</h3>
+                    <ul>
+                        {% for recommendation in densenet_recommendations %}
+                            {% if loop.index > 2 and loop.index <= 4 %}
+                                <li>{{ recommendation }}</li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col-md-4 recommendation-block">
+                    <h3>Products to Consider</h3>
+                    <ul>
+                        {% for recommendation in densenet_recommendations %}
+                            {% if loop.index > 4 %}
+                                <li>{{ recommendation }}</li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
         </div>
         <div class="col-12 text-center">
-            <a href="/" class="btn btn-primary mx-auto" style="width: 200px; background-color:#c3c3d5; color:black;border-color:#735366;">Back to Home</a>
+            <a href="/" class="btn btn-secondary" style="border-radius: 10px;">Back to Home</a>
         </div>
     </div>
 </div>

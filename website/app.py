@@ -26,10 +26,14 @@ def load_model(model_path, model_type):
         model.fc = nn.Linear(num_ftrs, 3)  # Assuming you have 3 classes
     elif model_type == 'densenet':
         model = models.densenet169(pretrained=False)
+          # Ensure this matches your class labels
     else:
         raise ValueError("Unsupported model type")
     
-    model.load_state_dict(torch.load(model_path, map_location=device))
+    # Load the state_dict for the model
+    state_dict = torch.load(model_path, map_location=device)
+    
+    model.load_state_dict(state_dict, strict=False)
     model.eval()
     return model
 
@@ -53,6 +57,42 @@ def predict_image(image_bytes, model_type):
     class_names = ['low', 'medium', 'severe']  # Ensure this matches your class labels
     return class_names[predicted.item()]
 
+def get_skincare_recommendations(severity):
+    recommendations = {
+        'low': [
+            "Use a gentle cleanser twice daily.",
+            "Apply a light moisturizer.",
+            "Use sunscreen with SPF 30+.",
+            "Avoid heavy makeup.",
+            
+            "1. Cetaphil Gentle Skin Cleanser",
+            "2. Neutrogena Hydro Boost Water Gel",
+            "3. La Roche-Posay Anthelios Melt-in Milk Sunscreen SPF 60"
+        ],
+        'medium': [
+            "Use a cleanser with salicylic acid.",
+            "Apply a moisturizer containing benzoyl peroxide.",
+            "Consider using a topical retinoid.",
+            "Use a gentle exfoliant once a week.",
+            
+            "1. Neutrogena Oil-Free Acne Wash",
+            "2. Clean & Clear Persa-Gel 10 Acne Medication",
+            "3. Differin Adapalene Gel 0.1% Acne Treatment"
+        ],
+        'severe': [
+            "Consult with a dermatologist.",
+            "Use prescription-strength treatments.",
+            "Avoid harsh scrubs and exfoliants.",
+            "Stay hydrated and maintain a healthy diet.",
+           
+            "1. CeraVe Hydrating Cleanser",
+            "2. Tazorac (Tazarotene) Cream",
+            "3. Aczone (Dapsone) Gel 7.5%"
+        ]
+    }
+    return recommendations.get(severity, [])
+
+
 @app.route('/upload_resnet', methods=['GET', 'POST'])
 def upload_resnet():
     if request.method == 'POST':
@@ -63,7 +103,8 @@ def upload_resnet():
             return
         img_bytes = file.read()
         resnet_prediction = predict_image(img_bytes, 'resnet')
-        return render_template('resultresnet.html', resnet_class=resnet_prediction)
+        recommendations = get_skincare_recommendations(resnet_prediction)
+        return render_template('resultresnet.html', resnet_class=resnet_prediction, recommendations=recommendations)
     return render_template('indexresnet.html')
 
 
@@ -77,7 +118,8 @@ def upload_densenet():
             return
         img_bytes = file.read()
         densenet_prediction = predict_image(img_bytes, 'densenet')
-        return render_template('resultdensenet.html', densenet_class=densenet_prediction)
+        recommendations = get_skincare_recommendations(densenet_prediction)
+        return render_template('resultdensenet.html', densenet_class=densenet_prediction, recommendations=recommendations)
     return render_template('indexdensenet.html')
 
 @app.route('/', methods=['GET', 'POST'])
@@ -91,7 +133,9 @@ def upload_file():
         img_bytes = file.read()
         resnet_prediction = predict_image(img_bytes, 'resnet')
         densenet_prediction = predict_image(img_bytes, 'densenet')
-        return render_template('result.html', resnet_class=resnet_prediction, densenet_class=densenet_prediction)
+        resnet_recommendations = get_skincare_recommendations(resnet_prediction)
+        densenet_recommendations = get_skincare_recommendations(densenet_prediction)
+        return render_template('result.html', resnet_class=resnet_prediction, densenet_class=densenet_prediction, resnet_recommendations=resnet_recommendations, densenet_recommendations=densenet_recommendations)
 
     return render_template('home.html')
 
@@ -155,19 +199,21 @@ def predict_camera():
 def result():
     resnet_class = request.args.get('resnet_class')
     densenet_class = request.args.get('densenet_class')
-    return render_template('result.html', resnet_class=resnet_class, densenet_class=densenet_class)
+    resnet_recommendations = get_skincare_recommendations(resnet_class)
+    densenet_recommendations = get_skincare_recommendations(densenet_class)
+    return render_template('result.html', resnet_class=resnet_class, densenet_class=densenet_class, resnet_recommendations=resnet_recommendations, densenet_recommendations=densenet_recommendations)
 
 @app.route('/resultresnet', methods=['GET'])
 def resultresnet():
     resnet_class = request.args.get('resnet_class')
-    densenet_class = request.args.get('densenet_class')
-    return render_template('resultresnet.html', resnet_class=resnet_class, densenet_class=densenet_class)
+    recommendations = get_skincare_recommendations(resnet_class)
+    return render_template('resultresnet.html', resnet_class=resnet_class, recommendations=recommendations)
 
 @app.route('/resultdensenet', methods=['GET'])
 def resultdensenet():
-    # resnet_class = request.args.get('resnet_class')
     densenet_class = request.args.get('densenet_class')
-    return render_template('resultdensenet.html',  densenet_class=densenet_class)
+    recommendations = get_skincare_recommendations(densenet_class)
+    return render_template('resultdensenet.html', densenet_class=densenet_class, recommendations=recommendations)
 
 
 if __name__ == '__main__':
