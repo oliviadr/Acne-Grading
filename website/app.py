@@ -52,8 +52,8 @@ def load_model(model_path, model_type):
     return model
 
 # Load models
-resnet_model = load_model('C:/Users/olivia/OneDrive/Desktop/a/Acne-Grading/models/finaltesthisbat45ep10last.pth', 'resnet')
-densenet_model = load_model('C:/Users/olivia/OneDrive/Desktop/a/Acne-Grading/models/densenetfinaltest50b2.pth', 'densenet')
+resnet_model = load_model('C:/Users/olivia/OneDrive/Desktop/a/Acne-Grading/models/model_resnet_50.pth', 'resnet')
+densenet_model = load_model('C:/Users/olivia/OneDrive/Desktop/a/Acne-Grading/models/model_densenet_169.pth', 'densenet')
 
 def predict_image(image_bytes, model_type):
     image = Image.open(io.BytesIO(image_bytes))
