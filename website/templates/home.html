@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <title>Acne Grading</title>
+  
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -103,7 +104,7 @@
                       </a>
                       </div>
                       <p class="slider--item-title">ResNet-50 & DenseNet-169</p>
-                      <p class="slider--item-description"> ResNet-50 achieves 83% training accuracy and 80% validation accuracy, while DenseNet-169 reaches 85.5% training accuracy and 77% validation accuracy. </p>
+                      <p class="slider--item-description"> ResNet-50 achieves 83% training accuracy and 73.2% validation accuracy, while DenseNet-169 reaches 85.5% training accuracy and 77% validation accuracy. </p>
                       <a href="{{ url_for('index') }}">
                      
                       <button class="slider--item-description" style="margin-top:5px;border:none; background-color:#c3c3d5 ;color: #735366;padding: 10px 20px;border-radius:10px;">Select
@@ -118,7 +119,7 @@
                       </a>
                       </div>
                       <p class="slider--item-title">ResNet-50</p>
-                      <p class="slider--item-description">Our acne detection and grading model leverages the powerful ResNet-50 architecture, achieving an impressive 83% training accuracy and 80% validation accuracy. </p>
+                      <p class="slider--item-description">Our acne detection and grading model leverages the powerful ResNet-50 architecture, achieving an impressive 83% training accuracy and 73.2% validation accuracy. </p>
                       <a href="{{ url_for('indexresnet') }}">
                      
                       <button class="slider--item-description" style="margin-top:5px;border:none; background-color:#c3c3d5 ;color: #735366;padding: 10px 20px;border-radius:10px;">Select
@@ -151,14 +152,16 @@
             <div class="about">
               
               <h2>About Models</h2>
-              <p>   <br>Our acne grading website utilizes two advanced deep learning models: ResNet-50 and DenseNet-169. Both models are renowned for their robust performance and have been pre-trained on extensive datasets to leverage their powerful feature extraction capabilities.
+  <br>ResNet-50, a 50-layer convolutional neural network, is known for its residual learning framework, which helps mitigate the vanishing gradient problem and enables training of very deep networks. This architecture allows the model to efficiently learn intricate features from the data.
 
-<br>To ensure our models are highly accurate and reliable, we trained them on a diverse dataset of over 1000 images. These images included both original and augmented versions to enhance the models' ability to generalize across various acne presentations. 
-<br>Augmentation techniques such as random cropping, horizontal flipping, color jittering, and histogram equalization were applied to simulate a wide range of real-world conditions and improve the models' robustness.
-
+                <br>On the other hand, DenseNet-169, a 169-layer neural network, uses dense connectivity between layers, meaning each layer receives inputs from all preceding layers. This unique structure improves information flow and gradient propagation, leading to potentially better performance with fewer parameters compared to traditional architectures.
+                
+                <br>To ensure our models are highly accurate and reliable, we trained them on a diverse dataset of over 1000 images. These images included both original and augmented versions to enhance the models' ability to generalize across various acne presentations. 
+                <br>Augmentation techniques such as random cropping, horizontal flipping, color jittering, and histogram equalization were applied to simulate a wide range of real-world conditions and improve the models' robustness.
+                
 <br><h2>Model Performance</h2>
 
-<br>ResNet-50: Achieved an impressive 83% training accuracy and 80% validation accuracy.
+<br>ResNet-50: Achieved an impressive 83% training accuracy and 73.2% validation accuracy.
 <br>DenseNet-169: Reached an outstanding 85.5% training accuracy and 77% validation accuracy.
 
 

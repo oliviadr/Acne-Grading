@@ -9,24 +9,38 @@ import base64
 app = Flask(__name__)
 
 # Define the device
-device = torch.device("cpu")  # use "cuda:0" if you are using GPU
+device = torch.device("cpu")  
 
-# Transformation definition remains the same
+def pad_image_to_square(img):
+    width, height = img.size
+    max_side = max(width, height)
+    padding = (
+        (max_side - width) // 2,
+        (max_side - height) // 2,
+        (max_side - width + 1) // 2,
+        (max_side - height + 1) // 2
+    )
+    return transforms.functional.pad(img, padding, fill=0, padding_mode='constant')
+
+
+
 transform = transforms.Compose([
-    transforms.Resize(256),
-    transforms.CenterCrop(224),
+    transforms.Lambda(pad_image_to_square),
+    transforms.Resize(224),
     transforms.ToTensor(),
 ])
+
 
 # Function to load a model
 def load_model(model_path, model_type):
     if model_type == 'resnet':
         model = models.resnet50(pretrained=False)
         num_ftrs = model.fc.in_features
-        model.fc = nn.Linear(num_ftrs, 3)  # Assuming you have 3 classes
+        model.fc = nn.Linear(num_ftrs, 3) 
     elif model_type == 'densenet':
         model = models.densenet169(pretrained=False)
-          # Ensure this matches your class labels
+        num_ftrs = model.classifier.in_features
+        model.classifier = nn.Linear(num_ftrs, 3)
     else:
         raise ValueError("Unsupported model type")
     
@@ -39,7 +53,7 @@ def load_model(model_path, model_type):
 
 # Load models
 resnet_model = load_model('C:/Users/olivia/OneDrive/Desktop/a/models/finaltesthisbat45ep10last.pth', 'resnet')
-densenet_model = load_model('C:/Users/olivia/OneDrive/Desktop/a/models/densenetfinaltest45b.pth', 'densenet')
+densenet_model = load_model('C:/Users/olivia/OneDrive/Desktop/a/models/densenetfinaltest50b2.pth', 'densenet')
 
 def predict_image(image_bytes, model_type):
     image = Image.open(io.BytesIO(image_bytes))
@@ -54,7 +68,7 @@ def predict_image(image_bytes, model_type):
         outputs = model(image)
         _, predicted = torch.max(outputs, 1)
     
-    class_names = ['low', 'medium', 'severe']  # Ensure this matches your class labels
+    class_names = ['low', 'medium', 'severe']  
     return class_names[predicted.item()]
 
 def get_skincare_recommendations(severity):
