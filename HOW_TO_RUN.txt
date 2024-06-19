@@ -1,0 +1,10 @@
+1. Download the archive 
+2. Open the folder in Visual Studio Code
+3. Open a new terminal
+4. Make sure you are in the folder(Acne-Grading), if not, use cd Acne-Grading to navigate
+5. cd website
+6. pip install flask
+7. set FLASK_APP=app.py
+8. In the app.py file, change the path of the models
+9. flask run
+10. open the local server
